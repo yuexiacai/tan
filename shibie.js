@@ -124,9 +124,12 @@ function hxask(){ //  封装 商务通原生打开窗口方法
 }
 function getCookie(c_name)
 {
+
     if (document.cookie.length>0)
     {
-        c_start=document.cookie.indexOf(c_name + "=")
+
+        c_start=document.cookie.indexOf(c_name + "=");
+
         if (c_start!=-1)
         {
             c_start=c_start + c_name.length+1
@@ -134,6 +137,7 @@ function getCookie(c_name)
             if (c_end==-1) c_end=document.cookie.length
             return unescape(document.cookie.substring(c_start,c_end))
         }
+
     }
     return ""
 }
@@ -155,7 +159,6 @@ function checkCookie()
         //设置cookie
         jsAjax.get("http://m.cqmw.com/shibie.php",callfn);
     }
+    /**/
 }
 checkCookie();
-
-
