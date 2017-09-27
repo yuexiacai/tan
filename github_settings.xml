@@ -1,0 +1,8 @@
+<application>
+  <component name="GithubSettings">
+    <option name="LOGIN" value="yuexiacai" />
+    <option name="AUTH_TYPE" value="BASIC" />
+    <option name="OPEN_IN_BROWSER_GIST" value="false" />
+    <option name="PRIVATE_GIST" value="false" />
+  </component>
+</application>
