@@ -1,35 +1,39 @@
 <?php
-/*
-function is_crawler() {
-  $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
-  $spiders = array(
-   // 'Googlebot', // Google 爬虫
-    'Baiduspider' // 百度爬虫
-    //'Yahoo! Slurp', // 雅虎爬虫
-    //'YodaoBot', // 有道爬虫
-    //'msnbot' // Bing爬虫
-    // 更多爬虫关键字
-  );
-  foreach ($spiders as $spider) {
-    $spider = strtolower($spider);
-    if (strpos($userAgent, $spider) !== false) {
-								echo("T");
-      return true;
+
+function is_crawler($ip_location) {
+    $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+    $spi="no";
+    $spiders = array(
+        // 'Googlebot', // Google 爬虫
+        'Baiduspider' // 百度爬虫
+        //'Yahoo! Slurp', // 雅虎爬虫
+        //'YodaoBot', // 有道爬虫
+        //'msnbot' // Bing爬虫
+        // 更多爬虫关键字
+    );
+    foreach ($spiders as $spider) {
+        $spider = strtolower($spider);
+        if (strpos($userAgent, $spider) !== false) {
+            //echo("T");
+            $spi = $spider;
+            return true;
+        }
     }
-  }
-		//echo($userAgent);
+    //echo($userAgent);
 
-		 $fp = @fopen('bot.txt','a');
-   fwrite($fp,date('Y-m-d H:i:s')."\t".$_SERVER["REMOTE_ADDR"]."\t".$userAgent."\t".'http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"]."\r\n");
-   fclose($fp);
+    $fp = @fopen('bot.txt','a');
+    //fwrite($fp,date('Y-m-d H:i:s')."\t".$_SERVER["REMOTE_ADDR"]."\t".$userAgent."\t".$_SERVER['HTTP_REFERER']."\t".'http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"]."\r\n");
+    fwrite($fp,date('Y-m-d H:i:s')."\t".$_SERVER["REMOTE_ADDR"]."\t".$ip_location."\t".$spi."\t".$userAgent."\t".$_SERVER['HTTP_REFERER']."\t"."\r\n");
+    fclose($fp);
 
 
-  return false;
+    return false;
 }
 
 
- is_crawler();
-	*/
+
+/*
+*/
 /*
 header('Content-Type: application/json');
 //header('Content-Type: text/html;charset=utf-8');
@@ -48,10 +52,7 @@ $ret = array(
 );
 */
 
-$ret = array(
-    'name' => '111',
-    'gender' => '222'
-);
+
 
 //header('content-type:application:json;charset=utf8');
 //header('content-type:application:json');
@@ -86,17 +87,7 @@ function getLocation($ip=''){
     $country = $arr['country']; //取得国家
     $province = $arr['province'];//获取省份
     $city = $arr['city']; //取得城市
-    /*
- if((string)$country == "中国"){
-  if((string)($province) != (string)$city){
-   $_location = $province.$city;
-  }else{
-   $_location = $country.$city;
-  }
- }else{
-  $_location = $country;
- }
-    */
+
     if((string)$country == "中国"){
         if((string)($province) != (string)$city){
             $_location = $province.$city;
@@ -114,15 +105,17 @@ header('Content-Type:text/javascript;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
 header('Access-Control-Allow-Methods:POST');
 header('Access-Control-Allow-Headers:x-requested-with,content-type');
+
+
 $ip_location =getLocation();
+is_crawler($ip_location);
 if (strpos($ip_location, "贵")||strpos($ip_location, "重庆")!== false) {
-    echo('var user_pass = {"ret":1};');
+    echo('1');
 }else{
-    echo('var user_pass = {"ret":0};');
+    echo('0');
 }
 
 
-//echo('var remote_ip_info = {"ret":1,"start":-1};');
-
-
 ?>
+
+
