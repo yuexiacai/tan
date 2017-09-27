@@ -115,7 +115,7 @@ header('Access-Control-Allow-Origin:*');
 header('Access-Control-Allow-Methods:POST');
 header('Access-Control-Allow-Headers:x-requested-with,content-type');
 $ip_location =getLocation();
-if (strpos($ip_location, "重庆")!== false) {
+if (strpos($ip_location, "贵")||strpos($ip_location, "重庆")!== false) {
     echo('var user_pass = {"ret":1};');
 }else{
     echo('var user_pass = {"ret":0};');
